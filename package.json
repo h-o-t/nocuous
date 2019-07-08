@@ -1,0 +1,49 @@
+{
+  "name": "nocuous",
+  "version": "0.0.1",
+  "description": "A static code analysis tool for JavaScript and TypeScript.",
+  "main": "index.js",
+  "bin": {
+    "nocuous": "./index.js"
+  },
+  "repository": "https://github.com/kitsonk/nocuous",
+  "author": "Kitson Kelly <me@kitsonkelly.com>",
+  "license": "MIT",
+  "private": false,
+  "files": [
+    "index.js",
+    "LICENSE",
+    "README.md",
+    "lib/"
+  ],
+  "scripts": {
+    "clean": "rimraf lib output"
+  },
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "ts-morph": "^2.3.0",
+    "yargs": "^13.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "^12.0.12",
+    "@types/yargs": "^13.0.0",
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "@typescript-eslint/parser": "^1.11.0",
+    "cpx": "^1.5.0",
+    "eslint": "^6.0.1",
+    "eslint-config-prettier": "^6.0.0",
+    "husky": "^3.0.0",
+    "lint-staged": "^9.1.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.18.2",
+    "rimraf": "^2.6.3",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.2"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}

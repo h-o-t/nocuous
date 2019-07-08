@@ -1,0 +1,14 @@
+{
+  "fileLength": {
+    "threshold": 500
+  },
+  "classFanOutComplexity": {
+    "threshold": 30
+  },
+  "classDataAbstractionCoupling": {
+    "threshold": 10
+  },
+  "anonInnerLength": {
+    "threshold": 35
+  }
+}
