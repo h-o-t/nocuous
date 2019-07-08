@@ -10,5 +10,11 @@
   },
   "anonInnerLength": {
     "threshold": 35
+  },
+  "methodLength": {
+    "threshold": 30
+  },
+  "functionLength": {
+    "threshold": 30
   }
 }

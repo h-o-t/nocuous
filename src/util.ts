@@ -12,3 +12,11 @@ export function commonStartsWith(values: string[]): string {
   }
   return first.substr(0, i);
 }
+
+/**
+ * Returns the number of effective lines there are in a string, ignoring blank
+ * lines.
+ */
+export function lineCount(value: string): number {
+  return value.split(/\n+\s*/).filter(line => line).length;
+}

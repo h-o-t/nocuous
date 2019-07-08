@@ -1,5 +1,6 @@
 import { SyntaxKind } from "ts-morph";
 import { Stat, StatOptions } from "../interfaces";
+import { lineCount } from "../util";
 
 /**
  * Searches the source file for class expressions or arrow functions and looks
@@ -21,7 +22,7 @@ export const stat: Stat<StatOptions> = async function stat(
       syntaxKind === SyntaxKind.ArrowFunction
     ) {
       count++;
-      const length = node.getText().split("\n").length;
+      const length = lineCount(node.getText());
       score += threshold && length > threshold ? length / threshold : 0;
       traversal.skip();
     }
