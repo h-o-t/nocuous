@@ -10,7 +10,7 @@ export interface StatResult {
   metric: string;
 
   /** The level that the result applies to. */
-  level: "file" | "class" | "method" | "function" | "statement" | "item";
+  level: "file" | "class" | "function" | "statement" | "item";
 
   /** The number of items that were counted at the specific level. */
   count: number;

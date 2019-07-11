@@ -26,7 +26,7 @@ export const stat: Stat<StatOptions> = async function stat(
       }
     });
     score +=
-      threshold > 0 && newExpressionCount > threshold
+      threshold > 0 && newExpressionCount >= threshold
         ? newExpressionCount / threshold
         : 0;
   }

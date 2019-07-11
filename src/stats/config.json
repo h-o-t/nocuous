@@ -11,10 +11,13 @@
   "anonInnerLength": {
     "threshold": 35
   },
-  "methodLength": {
-    "threshold": 30
-  },
   "functionLength": {
     "threshold": 30
+  },
+  "parameterNumber": {
+    "threshold": 6
+  },
+  "cyclomaticComplexity": {
+    "threshold": 10
   }
 }

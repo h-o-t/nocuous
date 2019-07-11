@@ -30,7 +30,7 @@ export const stat: Stat<StatOptions> = async function stat(
   let score = 0;
   for (const classNode of classes) {
     const count = countBaseTypes(classNode);
-    score += threshold > 0 && count > threshold ? count / threshold : 0;
+    score += threshold > 0 && count >= threshold ? count / threshold : 0;
   }
   return count
     ? {

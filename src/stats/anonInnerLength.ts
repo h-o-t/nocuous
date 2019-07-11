@@ -23,7 +23,7 @@ export const stat: Stat<StatOptions> = async function stat(
     ) {
       count++;
       const length = lineCount(node.getText());
-      score += threshold && length > threshold ? length / threshold : 0;
+      score += threshold && length >= threshold ? length / threshold : 0;
       traversal.skip();
     }
   });

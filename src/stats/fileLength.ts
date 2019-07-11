@@ -12,7 +12,7 @@ export const stat: Stat<StatOptions> = async function stat(
 ) {
   const lineCount = sourceFile.getEndLineNumber();
   const score =
-    threshold > 0 && lineCount > threshold ? lineCount / threshold : 0;
+    threshold > 0 && lineCount >= threshold ? lineCount / threshold : 0;
   return {
     metric: "fileLength",
     level: "file",
