@@ -5,7 +5,7 @@ function isConfig(value: string): boolean {
   return extname(value) === ".json";
 }
 
-export function createProject(root: string): Project {
+export function create(root: string): Project {
   const compilerOptions: CompilerOptions = {
     allowJs: true,
     checkJs: true,

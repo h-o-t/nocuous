@@ -1,5 +1,5 @@
 import { Arguments, CommandBuilder } from "yargs";
-import { createProject } from "../load";
+import { create } from "../project";
 import { StatResult, StatResults } from "../interfaces";
 import { report } from "../reports/console";
 import { load as loadStats } from "../stats/loader";
@@ -9,12 +9,13 @@ interface StatArguments extends Arguments {
   output: string;
 }
 
-export const command = "stat [input]";
+export const command = ["$0 [input]", "stat [input]"];
 
 export const describe = "Output statistics for a given input file.";
 
 export const builder: CommandBuilder = function(yargs) {
   return yargs
+    .example("$0 main.ts", "analyses and outputs statistics to standard out")
     .example(
       "$0 stat main.ts",
       "analyses and outputs statistics to standard out"
@@ -40,7 +41,7 @@ export async function handler({ input }: StatArguments): Promise<void> {
     throw new TypeError("input source required");
   }
   console.log(`- Analyzing "${input}"`);
-  const project = createProject(input);
+  const project = create(input);
   const sourceFiles = project.getSourceFiles();
   const results: StatResults = {};
   const statInfo = await loadStats();

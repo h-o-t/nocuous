@@ -1,0 +1,8 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const chai = require("chai");
+const chaiAsPromised = require("chai-as-promised");
+const sinonChai = require("sinon-chai");
+chai.use(chaiAsPromised);
+chai.use(sinonChai);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi90ZXN0cy9pbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZCQUE2QjtBQUM3QixtREFBbUQ7QUFDbkQsd0NBQXdDO0FBRXhDLElBQUksQ0FBQyxHQUFHLENBQUMsY0FBYyxDQUFDLENBQUM7QUFDekIsSUFBSSxDQUFDLEdBQUcsQ0FBQyxTQUFTLENBQUMsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCAqIGFzIGNoYWkgZnJvbSBcImNoYWlcIjtcbmltcG9ydCAqIGFzIGNoYWlBc1Byb21pc2VkIGZyb20gXCJjaGFpLWFzLXByb21pc2VkXCI7XG5pbXBvcnQgKiBhcyBzaW5vbkNoYWkgZnJvbSBcInNpbm9uLWNoYWlcIjtcblxuY2hhaS51c2UoY2hhaUFzUHJvbWlzZWQpO1xuY2hhaS51c2Uoc2lub25DaGFpKTtcbiJdfQ==

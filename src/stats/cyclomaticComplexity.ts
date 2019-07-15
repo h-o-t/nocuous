@@ -1,12 +1,13 @@
 import {
   BinaryExpression,
   DoStatement,
+  Expression,
   ForStatement,
+  IfStatement,
   Node,
   SyntaxKind,
   TypeGuards,
-  WhileStatement,
-  Expression
+  WhileStatement
 } from "ts-morph";
 import { Stat, StatOptions } from "../interfaces";
 
@@ -35,7 +36,6 @@ function cyclomaticComplexity(node: Node): number {
       case SyntaxKind.ConditionalExpression:
       case SyntaxKind.ForInStatement:
       case SyntaxKind.ForOfStatement:
-      case SyntaxKind.IfStatement:
         complexity++;
         break;
       case SyntaxKind.DoStatement:
@@ -58,6 +58,9 @@ function cyclomaticComplexity(node: Node): number {
         ) {
           complexity++;
         }
+        break;
+      case SyntaxKind.IfStatement:
+        complexity += (node as IfStatement).getElseStatement() ? 2 : 1;
         break;
       case SyntaxKind.BinaryExpression:
         complexity += binaryExpressionComplexity(node as BinaryExpression);

@@ -1,6 +1,8 @@
 import chalk from "chalk";
 import * as yargs from "yargs";
-import * as packageJson from "../package.json";
+
+/* eslint-disable-next-line @typescript-eslint/no-var-requires */
+const packageJson: { version: string } = require("../package.json");
 
 const { bold } = chalk;
 
@@ -15,8 +17,11 @@ yargs
     extensions: ["js", "ts"]
   })
   .demandCommand(1, "At least one command required\n")
-  .version("version", "Show version information", `Version ${packageJson.version}\n`)
+  .version(
+    "version",
+    "Show version information",
+    `Version ${packageJson.version}\n`
+  )
   .alias("version", "v")
   .help()
-  .wrap(80)
-  .argv;
+  .wrap(80).argv;

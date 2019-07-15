@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const path_1 = require("path");
+const ts_morph_1 = require("ts-morph");
+function fixtureAsSourceFile(fixture) {
+  const project = new ts_morph_1.Project({
+    compilerOptions: {
+      allowJs: true,
+      checkJs: true,
+      noEmit: true,
+      resolveJsonModule: true
+    }
+  });
+  const sourceFile = project.addExistingSourceFile(
+    path_1.join("tests", "fixtures", fixture)
+  );
+  project.resolveSourceFileDependencies();
+  return sourceFile;
+}
+exports.fixtureAsSourceFile = fixtureAsSourceFile;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidXRpbC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3Rlc3RzL3VuaXQvdXRpbC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLCtCQUE0QjtBQUM1Qix1Q0FBK0M7QUFFL0MsU0FBZ0IsbUJBQW1CLENBQUMsT0FBZTtJQUNqRCxNQUFNLE9BQU8sR0FBRyxJQUFJLGtCQUFPLENBQUM7UUFDMUIsZUFBZSxFQUFFO1lBQ2YsT0FBTyxFQUFFLElBQUk7WUFDYixPQUFPLEVBQUUsSUFBSTtZQUNiLE1BQU0sRUFBRSxJQUFJO1lBQ1osaUJBQWlCLEVBQUUsSUFBSTtTQUN4QjtLQUNGLENBQUMsQ0FBQztJQUVILE1BQU0sVUFBVSxHQUFHLE9BQU8sQ0FBQyxxQkFBcUIsQ0FDOUMsV0FBSSxDQUFDLE9BQU8sRUFBRSxVQUFVLEVBQUUsT0FBTyxDQUFDLENBQ25DLENBQUM7SUFDRixPQUFPLENBQUMsNkJBQTZCLEVBQUUsQ0FBQztJQUV4QyxPQUFPLFVBQVUsQ0FBQztBQUNwQixDQUFDO0FBaEJELGtEQWdCQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IGpvaW4gfSBmcm9tIFwicGF0aFwiO1xuaW1wb3J0IHsgUHJvamVjdCwgU291cmNlRmlsZSB9IGZyb20gXCJ0cy1tb3JwaFwiO1xuXG5leHBvcnQgZnVuY3Rpb24gZml4dHVyZUFzU291cmNlRmlsZShmaXh0dXJlOiBzdHJpbmcpOiBTb3VyY2VGaWxlIHtcbiAgY29uc3QgcHJvamVjdCA9IG5ldyBQcm9qZWN0KHtcbiAgICBjb21waWxlck9wdGlvbnM6IHtcbiAgICAgIGFsbG93SnM6IHRydWUsXG4gICAgICBjaGVja0pzOiB0cnVlLFxuICAgICAgbm9FbWl0OiB0cnVlLFxuICAgICAgcmVzb2x2ZUpzb25Nb2R1bGU6IHRydWVcbiAgICB9XG4gIH0pO1xuXG4gIGNvbnN0IHNvdXJjZUZpbGUgPSBwcm9qZWN0LmFkZEV4aXN0aW5nU291cmNlRmlsZShcbiAgICBqb2luKFwidGVzdHNcIiwgXCJmaXh0dXJlc1wiLCBmaXh0dXJlKVxuICApO1xuICBwcm9qZWN0LnJlc29sdmVTb3VyY2VGaWxlRGVwZW5kZW5jaWVzKCk7XG5cbiAgcmV0dXJuIHNvdXJjZUZpbGU7XG59XG4iXX0=

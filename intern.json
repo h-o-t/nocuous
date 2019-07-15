@@ -1,0 +1,9 @@
+{
+  "suites": ["./output/tests/index.js", "./output/tests/unit/**/*.js"],
+
+  "coverage": ["output/src/**/*.js"],
+
+  "configs": {
+    "local": {}
+  }
+}
