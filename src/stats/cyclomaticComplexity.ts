@@ -80,6 +80,8 @@ function cyclomaticComplexity(node: Node): number {
       case SyntaxKind.ArrowFunction:
       case SyntaxKind.MethodDeclaration:
       case SyntaxKind.ClassExpression:
+      case SyntaxKind.GetAccessor:
+      case SyntaxKind.SetAccessor:
         traversal.skip();
         break;
       default:
