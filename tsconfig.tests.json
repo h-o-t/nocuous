@@ -3,7 +3,8 @@
   "compilerOptions": {
     "inlineSourceMap": true,
     "inlineSources": true,
-    "outDir": "output"
+    "outDir": "output",
+    "types": ["chai-as-promised", "intern", "node", "sinon-chai"]
   },
   "include": ["./src/**/*", "./tests/**/*"]
 }

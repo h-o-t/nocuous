@@ -9,7 +9,7 @@
     "resolveJsonModule": true,
     "strict": true,
     "target": "esnext",
-    "types": ["chai-as-promised", "intern", "node", "sinon-chai"]
+    "types": ["node"]
   },
   "include": ["./src/**/*", "./tests/**/*"]
 }
