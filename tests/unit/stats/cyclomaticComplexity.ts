@@ -23,6 +23,6 @@ describe("stats/cyclomaticComplexity", () => {
     const sourceFile = fixtureAsSourceFile("stats/cyclomaticComplexity.ts");
     const result = await stat(sourceFile, { threshold: 10 });
     expect(result).to.not.be.undefined;
-    expect(result!.score).to.equal(0);
+    expect(result!.score).to.equal(1.1);
   });
 });
