@@ -1,28 +1,25 @@
-const { describe, it } = intern.getInterface("bdd");
-const { expect } = intern.getPlugin("chai");
+import test from "ava";
 
-import { fixtureAsSourceFile } from "../util";
+import { fixtureAsSourceFile } from "../../util";
 
 import { stat } from "../../../src/stats/cyclomaticComplexity";
 
-describe("stats/cyclomaticComplexity", () => {
-  it("returns undefined when no items", async () => {
-    const sourceFile = fixtureAsSourceFile("simple.ts");
-    const result = await stat(sourceFile, { threshold: 10 });
-    expect(result).to.be.undefined;
-  });
+test("stats/cyclomaticComplexity - no items", async t => {
+  const sourceFile = fixtureAsSourceFile("simple.ts");
+  const actual = await stat(sourceFile, { threshold: 10 });
+  t.is(actual, undefined);
+});
 
-  it("should count functions and methods", async () => {
-    const sourceFile = fixtureAsSourceFile("stats/cyclomaticComplexity.ts");
-    const result = await stat(sourceFile, { threshold: 10 });
-    expect(result).to.not.be.undefined;
-    expect(result!.count).to.equal(7);
-  });
+test("stats/cyclomaticComplexity - counts functions and methods", async t => {
+  const sourceFile = fixtureAsSourceFile("stats/cyclomaticComplexity.ts");
+  const actual = await stat(sourceFile, { threshold: 10 });
+  t.assert(actual);
+  t.is(actual?.count, 7);
+});
 
-  it("score based on the threshold", async () => {
-    const sourceFile = fixtureAsSourceFile("stats/cyclomaticComplexity.ts");
-    const result = await stat(sourceFile, { threshold: 10 });
-    expect(result).to.not.be.undefined;
-    expect(result!.score).to.equal(1.1);
-  });
+test("stats/cyclomaticComplexity - scores based on threshold", async t => {
+  const sourceFile = fixtureAsSourceFile("stats/cyclomaticComplexity.ts");
+  const actual = await stat(sourceFile, { threshold: 10 });
+  t.assert(actual);
+  t.is(actual?.score, 1.1);
 });

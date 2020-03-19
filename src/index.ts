@@ -1,4 +1,4 @@
-import chalk from "chalk";
+import * as chalk from "chalk";
 import * as yargs from "yargs";
 
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */

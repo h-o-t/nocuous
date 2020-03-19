@@ -11,7 +11,7 @@ export function fixtureAsSourceFile(fixture: string): SourceFile {
     }
   });
 
-  const sourceFile = project.addExistingSourceFile(
+  const sourceFile = project.addSourceFileAtPath(
     join("tests", "fixtures", fixture)
   );
   project.resolveSourceFileDependencies();

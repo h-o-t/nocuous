@@ -1,32 +1,25 @@
-const { describe, it } = intern.getInterface("bdd");
-const { expect } = intern.getPlugin("chai");
+import test from "ava";
 
-import { fixtureAsSourceFile } from "../util";
+import { fixtureAsSourceFile } from "../../util";
 
 import { stat } from "../../../src/stats/binaryExpressionComplexity";
 
-describe("stats/binaryExpressionComplexity", () => {
-  it("returns undefined when no items", async () => {
-    const sourceFile = fixtureAsSourceFile("simple.ts");
-    const result = await stat(sourceFile, { threshold: 3 });
-    expect(result).to.be.undefined;
-  });
+test("stats/binaryExpressionComplexity - returns undefined", async t => {
+  const sourceFile = fixtureAsSourceFile("simple.ts");
+  const actual = await stat(sourceFile, { threshold: 3 });
+  t.is(actual, undefined);
+});
 
-  it("should count binary expressions", async () => {
-    const sourceFile = fixtureAsSourceFile(
-      "stats/binaryExpressionComplexity.ts"
-    );
-    const result = await stat(sourceFile, { threshold: 3 });
-    expect(result).to.not.be.undefined;
-    expect(result!.count).to.equal(4);
-  });
+test("stats/binaryExpressionComplexity - counts binary expressions", async t => {
+  const sourceFile = fixtureAsSourceFile("stats/binaryExpressionComplexity.ts");
+  const actual = await stat(sourceFile, { threshold: 3 });
+  t.assert(actual);
+  t.is(actual?.count, 4);
+});
 
-  it("should score based on the threshold", async () => {
-    const sourceFile = fixtureAsSourceFile(
-      "stats/binaryExpressionComplexity.ts"
-    );
-    const result = await stat(sourceFile, { threshold: 3 });
-    expect(result).to.not.be.undefined;
-    expect(result!.score).to.equal(1);
-  });
+test("stats/binaryExpressionComplexity - scores based on threshold", async t => {
+  const sourceFile = fixtureAsSourceFile("stats/binaryExpressionComplexity.ts");
+  const actual = await stat(sourceFile, { threshold: 3 });
+  t.assert(actual);
+  t.is(actual?.score, 1);
 });

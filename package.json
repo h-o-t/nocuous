@@ -17,46 +17,47 @@
     "lib/"
   ],
   "scripts": {
-    "build:lib": "tsc -p tsconfig.lib.json",
-    "build:test": "tsc -p tsconfig.tests.json",
-    "clean": "rimraf lib output",
-    "copy": "cpx \"{src,tests}/**/*.{js,html,css,json}\" output & cpx package.json output",
+    "build": "tsc -p tsconfig.lib.json",
+    "clean": "rimraf lib",
     "precommit": "lint-staged",
-    "prepare": "npm-run-all build:lib",
-    "test": "npm-run-all clean build:test copy test:intern",
-    "test:intern": "intern"
+    "prepare": "npm-run-all build",
+    "test": "nyc ava"
   },
   "dependencies": {
-    "chalk": "^2.4.2",
-    "ts-morph": "^4.1.1",
-    "tslib": "^1.10.0",
-    "yargs": "^13.3.0"
+    "chalk": "3.0.0",
+    "ts-morph": "7.0.0",
+    "table": "5.4.6",
+    "tslib": "1.11.1",
+    "yargs": "15.3.1"
   },
   "devDependencies": {
-    "@types/chai-as-promised": "7.1.0",
-    "@types/node": "^12.7.9",
-    "@types/sinon": "^7.5.0",
-    "@types/sinon-chai": "3.2.2",
-    "@types/table": "^4.0.7",
-    "@types/yargs": "^13.0.3",
-    "@typescript-eslint/eslint-plugin": "^2.3.2",
-    "@typescript-eslint/parser": "^2.3.2",
-    "chai": "^4.2.0",
-    "chai-as-promised": "^7.1.1",
-    "cpx": "^1.5.0",
-    "eslint": "^6.5.1",
-    "eslint-config-prettier": "^6.3.0",
-    "husky": "^3.0.8",
-    "intern": "^4.4.3",
-    "lint-staged": "^9.4.1",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^1.18.2",
-    "rimraf": "^3.0.0",
-    "sinon": "^7.5.0",
-    "sinon-chai": "^3.3.0",
-    "table": "^5.4.6",
-    "ts-node": "^8.4.1",
-    "typescript": "^3.6.3"
+    "@types/node": "13.9.2",
+    "@types/table": "4.0.7",
+    "@types/yargs": "15.0.4",
+    "@typescript-eslint/eslint-plugin": "2.24.0",
+    "@typescript-eslint/parser": "2.24.0",
+    "ava": "3.5.0",
+    "eslint": "6.8.0",
+    "eslint-config-prettier": "6.10.0",
+    "husky": "4.2.3",
+    "lint-staged": "10.0.8",
+    "npm-run-all": "4.1.5",
+    "nyc": "15.0.0",
+    "prettier": "1.19.1",
+    "rimraf": "3.0.2",
+    "ts-node": "8.7.0",
+    "typescript": "3.8.3"
+  },
+  "ava": {
+    "files": [
+      "tests/unit/**/*"
+    ],
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
   },
   "lint-staged": {
     "*.{js,json,ts,tsx}": [

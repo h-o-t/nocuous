@@ -24,7 +24,7 @@ export function create(root: string): Project {
     compilerOptions
   });
 
-  project.addExistingSourceFile(root);
+  project.addSourceFileAtPath(root);
   project.resolveSourceFileDependencies();
 
   return project;

@@ -1,32 +1,29 @@
-const { describe, it } = intern.getInterface("bdd");
-const { expect } = intern.getPlugin("chai");
+import test from "ava";
 
-import { fixtureAsSourceFile } from "../util";
+import { fixtureAsSourceFile } from "../../util";
 
 import { stat } from "../../../src/stats/classDataAbstractionCoupling";
 
-describe("stats/classDataAbstractionCoupling", () => {
-  it("returns undefined when no items", async () => {
-    const sourceFile = fixtureAsSourceFile("simple.ts");
-    const result = await stat(sourceFile, { threshold: 10 });
-    expect(result).to.be.undefined;
-  });
+test("stats/classDataAbstractionCoupling - returns undefined", async t => {
+  const sourceFile = fixtureAsSourceFile("simple.ts");
+  const actual = await stat(sourceFile, { threshold: 10 });
+  t.is(actual, undefined);
+});
 
-  it("should count classes", async () => {
-    const sourceFile = fixtureAsSourceFile(
-      "stats/classDataAbstractionCoupling.ts"
-    );
-    const result = await stat(sourceFile, { threshold: 10 });
-    expect(result).to.not.be.undefined;
-    expect(result!.count).to.equal(2);
-  });
+test("stats/classDataAbstractionCoupling - counts classes", async t => {
+  const sourceFile = fixtureAsSourceFile(
+    "stats/classDataAbstractionCoupling.ts"
+  );
+  const actual = await stat(sourceFile, { threshold: 10 });
+  t.assert(actual);
+  t.is(actual?.count, 2);
+});
 
-  it("score based on the threshold", async () => {
-    const sourceFile = fixtureAsSourceFile(
-      "stats/classDataAbstractionCoupling.ts"
-    );
-    const result = await stat(sourceFile, { threshold: 10 });
-    expect(result).to.not.be.undefined;
-    expect(result!.score).to.equal(1);
-  });
+test("stats/classDataAbstractionCoupling - score based on threshold", async t => {
+  const sourceFile = fixtureAsSourceFile(
+    "stats/classDataAbstractionCoupling.ts"
+  );
+  const actual = await stat(sourceFile, { threshold: 10 });
+  t.assert(actual);
+  t.is(actual?.score, 1);
 });
