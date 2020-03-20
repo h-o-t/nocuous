@@ -1,4 +1,4 @@
-import { Block, TypeGuards } from "ts-morph";
+import { TypeGuards } from "ts-morph";
 import { Stat, StatOptions } from "../interfaces";
 
 /**
@@ -23,8 +23,8 @@ export const stat: Stat<StatOptions> = async function stat(
       TypeGuards.isArrowFunction(node)
     ) {
       count++;
-      const body = node.getBody() as Block | undefined;
-      if (body) {
+      const body = node.getBody();
+      if (body && TypeGuards.isBlock(body)) {
         const length = body.getStatements().length;
         score += threshold && length >= threshold ? length / threshold : 0;
       }

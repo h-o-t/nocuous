@@ -14,7 +14,7 @@ test("stats/functionLength - counts functions and method", async t => {
   const sourceFile = fixtureAsSourceFile("stats/functionLength.ts");
   const actual = await stat(sourceFile, { threshold: 30 });
   t.assert(actual);
-  t.is(actual?.count, 5);
+  t.is(actual?.count, 6);
 });
 
 test("stats/functionLength - scores based on threshold", async t => {

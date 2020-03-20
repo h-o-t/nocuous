@@ -46,3 +46,5 @@ function qux() {
   console.log("qux");
   console.log("qux");
 }
+
+const quux = (t: boolean) => !t;

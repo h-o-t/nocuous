@@ -4,6 +4,22 @@
 
 A static code analysis tool for JavaScript and TypeScript.
 
+## Installation
+
+```
+$ npx nocuous
+```
+
+## Commands
+
+### stat
+
+Currently the only command (which is also the default command) is `stat`. `stat` provides code toxicity statistics for a JavaScript or TypeScript project. The command expects a single input file. If this file is a JavaScript or TypeScript file, it will analyze that file plus any of its dependencies which get imported into that file for code toxicity and output the information to stdout. If the file is a `.json` file, it is assumed it is a `tsconfig.json` and uses that to determine what files to analyze. For example to run stats for a project:
+
+```
+$ npx nocuous index.ts
+```
+
 ## Background
 
 The statistics collected around code toxicity are based directly on Eric

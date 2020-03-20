@@ -22,6 +22,7 @@ yargs
     "Show version information",
     `Version ${packageJson.version}\n`
   )
+  .showHelpOnFail(false)
   .alias("version", "v")
   .help()
   .wrap(80).argv;
