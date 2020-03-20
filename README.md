@@ -27,22 +27,6 @@ Dörnenburg's article [How toxic is your code?](https://erik.doernenburg.com/200
 
 The default metrics are based on what is suggested in the article. When applying to TypeScript/JavaScript there are some adaptation that is required:
 
-```ts
-const labels: Record<string, string> = {
-  anonInnerLength: "AIL",
-  binaryExpressionComplexity: "BEC",
-  classDataAbstractionCoupling: "CDAC",
-  classFanOutComplexity: "CFAC",
-  cyclomaticComplexity: "CC",
-  fileLength: "L",
-  functionLength: "FL",
-  missingSwitchDefault: "MSD",
-  nestedIfDepth: "ID",
-  nestedTryDepth: "TD",
-  parameterNumber: "P"
-};
-```
-
 | Metric                          | Table Label | Description                                                                                      | Default Threshold |
 | ------------------------------- | ----------- | ------------------------------------------------------------------------------------------------ | ----------------- |
 | File length                     | L           | The number of lines in a file.                                                                   | 500               |
