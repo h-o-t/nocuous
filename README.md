@@ -20,6 +20,8 @@ Currently the only command (which is also the default command) is `stat`. `stat`
 $ npx nocuous index.ts
 ```
 
+`stat` can take an options of `-o` or `--output` which will write the results as a CSV to the specified file.
+
 ## Background
 
 The statistics collected around code toxicity are based directly on Eric
