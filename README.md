@@ -27,16 +27,32 @@ Dörnenburg's article [How toxic is your code?](https://erik.doernenburg.com/200
 
 The default metrics are based on what is suggested in the article. When applying to TypeScript/JavaScript there are some adaptation that is required:
 
-| Metric                          | Description                                                                                      | Default Threshold |
-| ------------------------------- | ------------------------------------------------------------------------------------------------ | ----------------- |
-| File length                     | The number of lines in a file.                                                                   | 500               |
-| Class fan-out complexity        | The number of classes or interfaces in the dependency chain for a given class.                   | 30                |
-| Class data abstraction coupling | The number of instances of other classes that are "new"ed in a given class.                      | 10                |
-| Anon Inner Length               | Class expressions of arrow functions length in number of lines.                                  | 35                |
-| Function Length                 | The number of statements in a function declaration, function expression, or method declaration.  | 30                |
-| Parameter Number                | The number of parameters for a function or method                                                | 6                 |
-| Cyclomatic Complexity           | The cyclomatic complexity for a function or method                                               | 10                |
-| Nested `if` Depth               | The number of nested `if` statements.                                                            | 3                 |
-| Nested `try` Depth              | The number of nested `try` statements.                                                           | 2                 |
-| Binary Expression Complexity    | How complex a binary expression is (e.g. how many `&&` and `||` keywords an expression contains) | 3                 |
-| Missing Switch Default          | Any `switch` statements that are missing the `default` case.                                     | 1                 |
+```ts
+const labels: Record<string, string> = {
+  anonInnerLength: "AIL",
+  binaryExpressionComplexity: "BEC",
+  classDataAbstractionCoupling: "CDAC",
+  classFanOutComplexity: "CFAC",
+  cyclomaticComplexity: "CC",
+  fileLength: "L",
+  functionLength: "FL",
+  missingSwitchDefault: "MSD",
+  nestedIfDepth: "ID",
+  nestedTryDepth: "TD",
+  parameterNumber: "P"
+};
+```
+
+| Metric                          | Table Label | Description                                                                                      | Default Threshold |
+| ------------------------------- | ----------- | ------------------------------------------------------------------------------------------------ | ----------------- |
+| File length                     | L           | The number of lines in a file.                                                                   | 500               |
+| Class fan-out complexity        | CFAC        | The number of classes or interfaces in the dependency chain for a given class.                   | 30                |
+| Class data abstraction coupling | CDAC        | The number of instances of other classes that are "new"ed in a given class.                      | 10                |
+| Anon Inner Length               | AIL         | Class expressions of arrow functions length in number of lines.                                  | 35                |
+| Function Length                 | FL          | The number of statements in a function declaration, function expression, or method declaration.  | 30                |
+| Parameter Number                | P           | The number of parameters for a function or method                                                | 6                 |
+| Cyclomatic Complexity           | CC          | The cyclomatic complexity for a function or method                                               | 10                |
+| Nested `if` Depth               | ID          | The number of nested `if` statements.                                                            | 3                 |
+| Nested `try` Depth              | TD          | The number of nested `try` statements.                                                           | 2                 |
+| Binary Expression Complexity    | BEC         | How complex a binary expression is (e.g. how many `&&` and `||` keywords an expression contains) | 3                 |
+| Missing Switch Default          | MSD         | Any `switch` statements that are missing the `default` case.                                     | 1                 |

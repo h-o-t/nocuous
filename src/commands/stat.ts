@@ -1,7 +1,7 @@
 import { Arguments, CommandBuilder } from "yargs";
 import { create } from "../project";
 import { StatResult, StatResults } from "../interfaces";
-import { report } from "../reports/console";
+import { report } from "../reports/consoleTable";
 import { load as loadStats } from "../stats/loader";
 
 interface StatArguments extends Arguments {
