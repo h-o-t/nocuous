@@ -1,6 +1,6 @@
 {
   "name": "nocuous",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A static code analysis tool for JavaScript and TypeScript.",
   "main": "index.js",
   "bin": {
@@ -25,8 +25,8 @@
   },
   "dependencies": {
     "chalk": "3.0.0",
-    "ts-morph": "7.0.0",
     "table": "5.4.6",
+    "ts-morph": "7.0.0",
     "tslib": "1.11.1",
     "yargs": "15.3.1"
   },
