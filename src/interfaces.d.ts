@@ -1,5 +1,10 @@
 import { SourceFile } from "ts-morph";
 
+export interface ReportOptions {
+  /** The file to write the output to, if not provided defaults to stdout. */
+  output?: string;
+}
+
 export interface StatOptions {
   /** The threshold that the score should be calculated by. */
   threshold: number;

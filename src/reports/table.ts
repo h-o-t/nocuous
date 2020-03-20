@@ -1,6 +1,6 @@
-import { table } from "table";
+import { table, getBorderCharacters } from "table";
 import { StatResults } from "../interfaces";
-import { commonStartsWith } from "../util";
+import { commonStartsWith, sortPaths } from "../util";
 
 const labels: Record<string, string> = {
   anonInnerLength: "AIL",
@@ -17,8 +17,9 @@ const labels: Record<string, string> = {
 };
 
 export function report(results: StatResults): void {
-  const commonRoot = commonStartsWith(Object.keys(results));
-  console.log(`root: ${commonRoot}`);
+  const paths = sortPaths(Object.keys(results));
+  const commonRoot = commonStartsWith(paths);
+  console.log(`\nRoot path: ${commonRoot}\n`);
   const headers: string[] = [];
   for (const stats of Object.values(results)) {
     for (const { metric } of stats) {
@@ -28,7 +29,8 @@ export function report(results: StatResults): void {
     }
   }
   const rows: Array<Array<string | undefined>> = [];
-  for (const [path, stats] of Object.entries(results)) {
+  for (const path of paths) {
+    const stats = results[path];
     const row: Array<string | undefined> = [];
     let total = 0;
     for (const { score, metric } of stats) {
@@ -47,6 +49,7 @@ export function report(results: StatResults): void {
   rows.unshift(titles);
   console.log(
     table(rows, {
+      border: getBorderCharacters("norc"),
       drawHorizontalLine: (i, s) => i <= 1 || i === s
     })
   );

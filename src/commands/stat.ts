@@ -1,7 +1,6 @@
 import { Arguments, CommandBuilder } from "yargs";
 import { create } from "../project";
 import { StatResult, StatResults } from "../interfaces";
-import { report } from "../reports/consoleTable";
 import { load as loadStats } from "../stats/loader";
 
 interface StatArguments extends Arguments {
@@ -24,10 +23,13 @@ export const builder: CommandBuilder = function(yargs) {
       "$0 stat tsconfig.json",
       "uses the TypeScript configuration file to identify the code to analyse"
     )
+    .example(
+      "$0 stat -o out.csv index.js",
+      "writes the results as a CSV file to out.csv"
+    )
     .option("output", {
       alias: "o",
-      describe: "direct the output to a specific file",
-      default: "",
+      describe: "write out the output as a CSV file to the specified path",
       type: "string"
     })
     .positional("input", {
@@ -36,7 +38,7 @@ export const builder: CommandBuilder = function(yargs) {
     });
 };
 
-export async function handler({ input }: StatArguments): Promise<void> {
+export async function handler({ input, output }: StatArguments): Promise<void> {
   if (!input) {
     throw new TypeError("input source required");
   }
@@ -55,5 +57,10 @@ export async function handler({ input }: StatArguments): Promise<void> {
       }
     }
   }
+  if (output) {
+    const { report } = await import("../reports/csv");
+    report(results, { output });
+  }
+  const { report } = await import("../reports/table");
   report(results);
 }
