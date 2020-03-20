@@ -1,6 +1,6 @@
 {
   "name": "nocuous",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A static code analysis tool for JavaScript and TypeScript.",
   "main": "index.js",
   "bin": {
