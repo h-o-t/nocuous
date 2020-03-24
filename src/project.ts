@@ -1,11 +1,11 @@
 import { extname } from "path";
 import { CompilerOptions, Project } from "ts-morph";
 
-function isConfig(value: string): boolean {
-  return extname(value) === ".json";
+function isConfig(value: string | readonly string[]): value is string {
+  return typeof value === "string" && extname(value) === ".json";
 }
 
-export function create(root: string): Project {
+export function create(root: string | readonly string[]): Project {
   const compilerOptions: CompilerOptions = {
     allowJs: true,
     checkJs: true,
@@ -14,17 +14,14 @@ export function create(root: string): Project {
   };
 
   if (isConfig(root)) {
-    return new Project({
-      compilerOptions,
-      tsConfigFilePath: root
-    });
+    return new Project({ compilerOptions, tsConfigFilePath: root });
   }
 
   const project = new Project({
     compilerOptions
   });
 
-  project.addSourceFileAtPath(root);
+  project.addSourceFilesAtPaths(root);
   project.resolveSourceFileDependencies();
 
   return project;

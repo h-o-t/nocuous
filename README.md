@@ -22,6 +22,8 @@ $ npx nocuous index.ts
 
 `stat` can take an options of `-o` or `--output` which will write the results as a CSV to the specified file.
 
+`stat` also accepts multiple input files and glob patterns passed as input files.
+
 ## Background
 
 The statistics collected around code toxicity are based directly on Eric

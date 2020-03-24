@@ -4,13 +4,13 @@ import { StatResult, StatResults } from "../interfaces";
 import { load as loadStats } from "../stats/loader";
 
 interface StatArguments extends Arguments {
-  input: string;
+  inputs: string[];
   output: string;
 }
 
-export const command = ["$0 [input]", "stat [input]"];
+export const command = ["$0 [inputs..]", "stat [inputs..]"];
 
-export const describe = "Output statistics for a given input file.";
+export const describe = "Output statistics for a given input file(s).";
 
 export const builder: CommandBuilder = function(yargs) {
   return yargs
@@ -27,23 +27,34 @@ export const builder: CommandBuilder = function(yargs) {
       "$0 stat -o out.csv index.js",
       "writes the results as a CSV file to out.csv"
     )
+    .example(
+      "$0 stat index.js lib.js",
+      "analyses both `index.js` and `lib.js` and any modules they import"
+    )
+    .example(
+      "$0 stat src/**/*.js",
+      "analyse all the files that end in `.js` in the src directory and sub-directories"
+    )
     .option("output", {
       alias: "o",
       describe: "write out the output as a CSV file to the specified path",
       type: "string"
     })
-    .positional("input", {
-      describe: "root input file or configuration file to analyse",
+    .positional("inputs", {
+      describe: "root input files or a configuration file to analyse",
       type: "string"
     });
 };
 
-export async function handler({ input, output }: StatArguments): Promise<void> {
-  if (!input) {
+export async function handler({
+  inputs,
+  output
+}: StatArguments): Promise<void> {
+  if (!inputs) {
     throw new TypeError("input source required");
   }
-  console.log(`- Analyzing "${input}"`);
-  const project = create(input);
+  console.log(`- Analyzing "${inputs.join(`", "`)}"`);
+  const project = create(inputs);
   const sourceFiles = project.getSourceFiles();
   const results: StatResults = {};
   const statInfo = await loadStats();
