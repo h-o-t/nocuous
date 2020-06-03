@@ -1,6 +1,6 @@
 # nocuous
 
-[![Build Status](https://dev.azure.com/kitsonk/nocuous/_apis/build/status/kitsonk.nocuous?branchName=master)](https://dev.azure.com/kitsonk/nocuous/_build/latest?definitionId=1&branchName=master)
+![CI](https://github.com/h-o-t/nocuous/workflows/CI/badge.svg)
 [![npm version](https://img.shields.io/npm/v/nocuous)](https://www.npmjs.com/package/nocuous)
 
 A static code analysis tool for JavaScript and TypeScript.
