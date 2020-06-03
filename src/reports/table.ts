@@ -13,7 +13,7 @@ const labels: Record<string, string> = {
   missingSwitchDefault: "MSD",
   nestedIfDepth: "ID",
   nestedTryDepth: "TD",
-  parameterNumber: "P"
+  parameterNumber: "P",
 };
 
 export function report(results: StatResults): void {
@@ -43,14 +43,14 @@ export function report(results: StatResults): void {
     row.unshift(path.replace(commonRoot, ""));
     rows.push(row);
   }
-  const titles = headers.map(h => labels[h]);
+  const titles = headers.map((h) => labels[h]);
   titles.unshift("Path");
   titles.push("Total");
   rows.unshift(titles);
   console.log(
     table(rows, {
       border: getBorderCharacters("norc"),
-      drawHorizontalLine: (i, s) => i <= 1 || i === s
+      drawHorizontalLine: (i, s) => i <= 1 || i === s,
     })
   );
 }

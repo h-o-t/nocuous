@@ -7,8 +7,8 @@ export function fixtureAsSourceFile(fixture: string): SourceFile {
       allowJs: true,
       checkJs: true,
       noEmit: true,
-      resolveJsonModule: true
-    }
+      resolveJsonModule: true,
+    },
   });
 
   const sourceFile = project.addSourceFileAtPath(

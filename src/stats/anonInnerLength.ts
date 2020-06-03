@@ -33,7 +33,7 @@ export const stat: Stat<StatOptions> = async function stat(
         level: "item",
         count,
         threshold,
-        score
+        score,
       }
     : undefined;
 };

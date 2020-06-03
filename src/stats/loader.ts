@@ -23,7 +23,7 @@ export async function load(config?: Config): Promise<Map<string, StatInfo>> {
     const fn: Stat<StatOptions> = (await import(statModule)).stat;
     statMap.set(statName, {
       fn,
-      options: config[statName]
+      options: config[statName],
     });
   }
 

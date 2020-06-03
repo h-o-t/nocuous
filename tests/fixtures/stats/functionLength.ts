@@ -10,7 +10,7 @@ const baz = () => {
   console.log("baz");
 };
 
-const qat = function() {
+const qat = function () {
   return "qat";
 };
 

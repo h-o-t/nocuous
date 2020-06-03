@@ -44,7 +44,7 @@ export const stat: Stat<StatOptions> = async function stat(
 ) {
   let count = 0;
   let score = 0;
-  sourceFile.forEachDescendant(node => {
+  sourceFile.forEachDescendant((node) => {
     if (TypeGuards.isTryStatement(node)) {
       const value = tryStatementDepth(node);
       if (value) {
@@ -59,7 +59,7 @@ export const stat: Stat<StatOptions> = async function stat(
         level: "statement",
         count,
         threshold,
-        score
+        score,
       }
     : undefined;
 };

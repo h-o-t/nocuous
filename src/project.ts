@@ -10,7 +10,7 @@ export function create(root: string | readonly string[]): Project {
     allowJs: true,
     checkJs: true,
     noEmit: true,
-    resolveJsonModule: true
+    resolveJsonModule: true,
   };
 
   if (isConfig(root)) {
@@ -18,7 +18,7 @@ export function create(root: string | readonly string[]): Project {
   }
 
   const project = new Project({
-    compilerOptions
+    compilerOptions,
   });
 
   project.addSourceFilesAtPaths(root);

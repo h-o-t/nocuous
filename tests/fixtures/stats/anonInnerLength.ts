@@ -1,4 +1,4 @@
-[].map(item => {
+[].map((item) => {
   console.log(item);
 });
 

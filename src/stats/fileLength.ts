@@ -18,6 +18,6 @@ export const stat: Stat<StatOptions> = async function stat(
     level: "file",
     count: 1, // files are always a single count
     threshold,
-    score
+    score,
   };
 };

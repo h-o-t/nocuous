@@ -1,7 +1,7 @@
 export class Foo {
   private _bar = "bar";
   getBaz = (): boolean => {
-    return ["baz"].some(item => item === "baz");
+    return ["baz"].some((item) => item === "baz");
   };
   getBar(): string {
     return this._bar;
@@ -15,11 +15,11 @@ export function bar(): string {
   return "bar";
 }
 
-export const baz = function(): string {
+export const baz = function (): string {
   return "baz";
 };
 
-export const qat = [{ foo: "foo" }].map(item => item.foo);
+export const qat = [{ foo: "foo" }].map((item) => item.foo);
 
 export function qux(a: string, b: string): string | number {
   if (a && typeof a === "string") {

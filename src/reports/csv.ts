@@ -13,7 +13,7 @@ const labels: Record<string, string> = {
   missingSwitchDefault: "Missing switch default",
   nestedIfDepth: "Nested if depth",
   nestedTryDepth: "Nested try depth",
-  parameterNumber: "Parameter number"
+  parameterNumber: "Parameter number",
 };
 
 export function report(
@@ -42,7 +42,7 @@ export function report(
     row.length = headers.length;
     rows.push(row.join(","));
   }
-  const titles = headers.map(h => `"${labels[h]}"`);
+  const titles = headers.map((h) => `"${labels[h]}"`);
   titles.unshift(`"Path"`);
   rows.unshift(titles.join(","));
   const content = rows.join("\n");

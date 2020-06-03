@@ -36,7 +36,7 @@ export const stat: Stat<StatOptions> = async function stat(
         level: "class",
         count,
         threshold,
-        score
+        score,
       }
     : undefined;
 };

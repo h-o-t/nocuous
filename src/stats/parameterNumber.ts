@@ -7,7 +7,7 @@ export const stat: Stat<StatOptions> = async function stat(
 ) {
   let count = 0;
   let score = 0;
-  sourceFile.forEachDescendant(node => {
+  sourceFile.forEachDescendant((node) => {
     if (
       TypeGuards.isFunctionDeclaration(node) ||
       TypeGuards.isFunctionExpression(node) ||
@@ -25,7 +25,7 @@ export const stat: Stat<StatOptions> = async function stat(
         level: "function",
         count,
         threshold,
-        score
+        score,
       }
     : undefined;
 };

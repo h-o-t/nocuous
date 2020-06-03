@@ -7,13 +7,13 @@ import {
   Node,
   SyntaxKind,
   TypeGuards,
-  WhileStatement
+  WhileStatement,
 } from "ts-morph";
 import { Stat, StatOptions } from "../interfaces";
 
 function binaryExpressionComplexity(node: BinaryExpression): number {
   let complexity = 0;
-  node.forEachChild(node => {
+  node.forEachChild((node) => {
     const kind = node.getKind();
     if (
       kind === SyntaxKind.AmpersandAmpersandToken ||
@@ -97,7 +97,7 @@ export const stat: Stat<StatOptions> = async function stat(
 ) {
   let count = 0;
   let score = 0;
-  sourceFile.forEachDescendant(node => {
+  sourceFile.forEachDescendant((node) => {
     if (
       TypeGuards.isFunctionDeclaration(node) ||
       TypeGuards.isFunctionExpression(node) ||
@@ -116,7 +116,7 @@ export const stat: Stat<StatOptions> = async function stat(
         level: "function",
         count,
         threshold,
-        score
+        score,
       }
     : undefined;
 };

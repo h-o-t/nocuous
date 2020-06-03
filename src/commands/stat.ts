@@ -12,7 +12,7 @@ export const command = ["$0 [inputs..]", "stat [inputs..]"];
 
 export const describe = "Output statistics for a given input file(s).";
 
-export const builder: CommandBuilder = function(yargs) {
+export const builder: CommandBuilder = function (yargs) {
   return yargs
     .example("$0 main.ts", "analyses and outputs statistics to standard out")
     .example(
@@ -38,17 +38,17 @@ export const builder: CommandBuilder = function(yargs) {
     .option("output", {
       alias: "o",
       describe: "write out the output as a CSV file to the specified path",
-      type: "string"
+      type: "string",
     })
     .positional("inputs", {
       describe: "root input files or a configuration file to analyse",
-      type: "string"
+      type: "string",
     });
 };
 
 export async function handler({
   inputs,
-  output
+  output,
 }: StatArguments): Promise<void> {
   if (!inputs) {
     throw new TypeError("input source required");

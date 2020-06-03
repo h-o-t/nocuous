@@ -20,12 +20,12 @@ export function commonStartsWith(values: string[]): string {
  * lines.
  */
 export function lineCount(value: string): number {
-  return value.split(/\n+\s*/).filter(line => line).length;
+  return value.split(/\n+\s*/).filter((line) => line).length;
 }
 
 const collator = new Intl.Collator(undefined, {
   numeric: true,
-  sensitivity: "base"
+  sensitivity: "base",
 });
 
 export function sortPaths(paths: string[]): string[] {

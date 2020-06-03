@@ -14,7 +14,7 @@ yargs
   .pkgConf("nocuous")
   .usage("usage: $0 <command>")
   .commandDir("commands", {
-    extensions: ["js", "ts"]
+    extensions: ["js", "ts"],
   })
   .demandCommand(1, "At least one command required\n")
   .version(
