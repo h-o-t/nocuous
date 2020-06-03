@@ -12,7 +12,7 @@ export const command = ["$0 [inputs..]", "stat [inputs..]"];
 
 export const describe = "Output statistics for a given input file(s).";
 
-export const builder: CommandBuilder = function (yargs) {
+export const builder: CommandBuilder = (yargs) => {
   return yargs
     .example("$0 main.ts", "analyses and outputs statistics to standard out")
     .example(
@@ -53,6 +53,7 @@ export async function handler({
   if (!inputs) {
     throw new TypeError("input source required");
   }
+  // eslint-disable-next-line no-console
   console.log(`- Analyzing "${inputs.join(`", "`)}"`);
   const project = create(inputs);
   const sourceFiles = project.getSourceFiles();
@@ -60,6 +61,7 @@ export async function handler({
   const statInfo = await loadStats();
   for (const sourceFile of sourceFiles) {
     const filename = sourceFile.getFilePath();
+    // eslint-disable-next-line no-multi-assign
     const stats: StatResult[] = (results[filename] = []);
     for (const { fn, options } of statInfo.values()) {
       const result = await fn(sourceFile, options);

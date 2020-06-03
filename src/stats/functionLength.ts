@@ -25,7 +25,7 @@ export const stat: Stat<StatOptions> = async function stat(
       count++;
       const body = node.getBody();
       if (body && TypeGuards.isBlock(body)) {
-        const length = body.getStatements().length;
+        const { length } = body.getStatements();
         score += threshold && length >= threshold ? length / threshold : 0;
       }
     }

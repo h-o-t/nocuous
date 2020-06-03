@@ -14,8 +14,8 @@ function ifStatementDepth(node: IfStatement): number {
   }
   let score = 1;
   seenIfStatements.add(node);
-  node.getThenStatement().forEachDescendant((node, traversal) => {
-    const kind = node.getKind();
+  node.getThenStatement().forEachDescendant((descendent, traversal) => {
+    const kind = descendent.getKind();
     switch (kind) {
       case SyntaxKind.ArrowFunction:
       case SyntaxKind.FunctionDeclaration:
@@ -24,7 +24,7 @@ function ifStatementDepth(node: IfStatement): number {
         traversal.skip();
         break;
       case SyntaxKind.IfStatement:
-        score += ifStatementDepth(node as IfStatement);
+        score += ifStatementDepth(descendent as IfStatement);
         break;
       default:
       // noop

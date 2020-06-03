@@ -10,7 +10,7 @@ export const stat: Stat<StatOptions> = async function stat(sourceFile) {
       const hasDefaultClause = node
         .getCaseBlock()
         .getClauses()
-        .some((node) => TypeGuards.isDefaultClause(node));
+        .some((clauseNode) => TypeGuards.isDefaultClause(clauseNode));
       if (!hasDefaultClause) {
         score++;
       }

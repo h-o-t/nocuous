@@ -15,8 +15,8 @@ function tryStatementDepth(node: TryStatement): number {
   }
   let score = 1;
   seenTryStatements.add(node);
-  node.getTryBlock().forEachDescendant((node, traversal) => {
-    const kind = node.getKind();
+  node.getTryBlock().forEachDescendant((descendent, traversal) => {
+    const kind = descendent.getKind();
     switch (kind) {
       case SyntaxKind.ArrowFunction:
       case SyntaxKind.FunctionDeclaration:
@@ -25,7 +25,7 @@ function tryStatementDepth(node: TryStatement): number {
         traversal.skip();
         break;
       case SyntaxKind.TryStatement:
-        score += tryStatementDepth(node as TryStatement);
+        score += tryStatementDepth(descendent as TryStatement);
         break;
       default:
       // noop

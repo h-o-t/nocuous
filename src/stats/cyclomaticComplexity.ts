@@ -13,8 +13,8 @@ import { Stat, StatOptions } from "../interfaces";
 
 function binaryExpressionComplexity(node: BinaryExpression): number {
   let complexity = 0;
-  node.forEachChild((node) => {
-    const kind = node.getKind();
+  node.forEachChild((innerNode) => {
+    const kind = innerNode.getKind();
     if (
       kind === SyntaxKind.AmpersandAmpersandToken ||
       kind === SyntaxKind.BarBarToken
@@ -28,9 +28,9 @@ function binaryExpressionComplexity(node: BinaryExpression): number {
 function cyclomaticComplexity(node: Node): number {
   let complexity = 1;
 
-  node.forEachDescendant((node, traversal) => {
+  node.forEachDescendant((descendent, traversal) => {
     let expression: Expression;
-    switch (node.getKind()) {
+    switch (descendent.getKind()) {
       case SyntaxKind.CaseClause:
       case SyntaxKind.CatchClause:
       case SyntaxKind.ConditionalExpression:
@@ -39,7 +39,7 @@ function cyclomaticComplexity(node: Node): number {
         complexity++;
         break;
       case SyntaxKind.DoStatement:
-        expression = (node as DoStatement).getExpression();
+        expression = (descendent as DoStatement).getExpression();
         if (
           TypeGuards.isBinaryExpression(expression) ||
           TypeGuards.isIdentifier(expression) ||
@@ -49,7 +49,8 @@ function cyclomaticComplexity(node: Node): number {
         }
         break;
       case SyntaxKind.ForStatement:
-        const condition = (node as ForStatement).getCondition();
+        // eslint-disable-next-line no-case-declarations
+        const condition = (descendent as ForStatement).getCondition();
         if (
           condition &&
           (TypeGuards.isBinaryExpression(condition) ||
@@ -60,13 +61,15 @@ function cyclomaticComplexity(node: Node): number {
         }
         break;
       case SyntaxKind.IfStatement:
-        complexity += (node as IfStatement).getElseStatement() ? 2 : 1;
+        complexity += (descendent as IfStatement).getElseStatement() ? 2 : 1;
         break;
       case SyntaxKind.BinaryExpression:
-        complexity += binaryExpressionComplexity(node as BinaryExpression);
+        complexity += binaryExpressionComplexity(
+          descendent as BinaryExpression
+        );
         break;
       case SyntaxKind.WhileStatement:
-        expression = (node as WhileStatement).getExpression();
+        expression = (descendent as WhileStatement).getExpression();
         if (
           TypeGuards.isBinaryExpression(expression) ||
           TypeGuards.isIdentifier(expression) ||

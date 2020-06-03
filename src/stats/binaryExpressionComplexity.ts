@@ -11,8 +11,8 @@ export const stat: Stat<StatOptions> = async function stat(
     if (TypeGuards.isBinaryExpression(node)) {
       count++;
       let complexity = 1;
-      node.forEachDescendant((node) => {
-        if (TypeGuards.isBinaryExpression(node)) {
+      node.forEachDescendant((innerNode) => {
+        if (TypeGuards.isBinaryExpression(innerNode)) {
           complexity++;
         }
       });

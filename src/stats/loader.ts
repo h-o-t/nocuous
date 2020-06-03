@@ -14,6 +14,7 @@ interface StatInfo<O extends StatOptions = StatOptions> {
  * the stats, including the stat function and configuration options.
  */
 export async function load(config?: Config): Promise<Map<string, StatInfo>> {
+  // eslint-disable-next-line no-param-reassign
   config = config || (await import("./config.json"));
 
   const statMap = new Map<string, StatInfo>();

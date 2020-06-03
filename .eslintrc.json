@@ -5,26 +5,29 @@
     "project": "./tsconfig.json"
   },
   "plugins": ["@typescript-eslint"],
-  "extends": [
-    "plugin:@typescript-eslint/recommended",
-    "prettier",
-    "prettier/@typescript-eslint"
-  ],
+  "extends": ["airbnb-typescript-prettier"],
+  "settings": {
+    "react": {
+      "version": "999.999.999"
+    }
+  },
   "rules": {
-    "@typescript-eslint/array-type": ["error", "array-simple"],
-    "@typescript-eslint/explicit-function-return-type": [
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-useless-constructor": "error",
+    "import/no-cycle": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "import/prefer-default-export": "off",
+    "lines-between-class-members": [
       "error",
-      {
-        "allowExpressions": true,
-        "allowTypedFunctionExpressions": true
-      }
+      "always",
+      { "exceptAfterSingleLine": true }
     ],
-    "@typescript-eslint/explicit-member-accessibility": ["off"],
-    "@typescript-eslint/no-non-null-assertion": ["off"],
-    "@typescript-eslint/no-parameter-properties": ["off"],
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      { "argsIgnorePattern": "^_" }
-    ]
+    "no-await-in-loop": "off",
+    "no-cond-assign": ["error", "except-parens"],
+    "no-plusplus": "off",
+    "no-restricted-syntax": ["off", "ForOfStatement"],
+    "no-underscore-dangle": "off",
+    "no-useless-constructor": "off"
   }
 }
