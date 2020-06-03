@@ -10,6 +10,7 @@ console.log(`
 ${bold("nocuous - A static code analysis tool for JavaScript and TypeScript.")}
 `);
 
+// eslint-disable-next-line no-unused-expressions
 yargs
   .pkgConf("nocuous")
   .usage("usage: $0 <command>")

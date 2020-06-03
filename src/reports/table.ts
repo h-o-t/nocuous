@@ -19,7 +19,6 @@ const labels: Record<string, string> = {
 export function report(results: StatResults): void {
   const paths = sortPaths(Object.keys(results));
   const commonRoot = commonStartsWith(paths);
-  // eslint-disable-next-line no-console
   console.log(`\nRoot path: ${commonRoot}\n`);
   const headers: string[] = [];
   for (const stats of Object.values(results)) {
@@ -48,7 +47,6 @@ export function report(results: StatResults): void {
   titles.unshift("Path");
   titles.push("Total");
   rows.unshift(titles);
-  // eslint-disable-next-line no-console
   console.log(
     table(rows, {
       border: getBorderCharacters("norc"),

@@ -49,7 +49,6 @@ export function report(
   if (output) {
     writeFileSync(output, content, { encoding: "utf8" });
   } else {
-    // eslint-disable-next-line no-console
     console.log(content);
   }
 }

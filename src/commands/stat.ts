@@ -53,7 +53,6 @@ export async function handler({
   if (!inputs) {
     throw new TypeError("input source required");
   }
-  // eslint-disable-next-line no-console
   console.log(`- Analyzing "${inputs.join(`", "`)}"`);
   const project = create(inputs);
   const sourceFiles = project.getSourceFiles();
