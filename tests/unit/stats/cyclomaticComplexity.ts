@@ -14,7 +14,7 @@ test("stats/cyclomaticComplexity - counts functions and methods", async (t) => {
   const sourceFile = fixtureAsSourceFile("stats/cyclomaticComplexity.ts");
   const actual = await stat(sourceFile, { threshold: 10 });
   t.assert(actual);
-  t.is(actual?.count, 7);
+  t.is(actual?.count, 11);
 });
 
 test("stats/cyclomaticComplexity - scores based on threshold", async (t) => {
