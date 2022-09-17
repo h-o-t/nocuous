@@ -39,7 +39,7 @@ export function report(
       }
     }
     row.unshift(`"${path}"`);
-    row.length = headers.length;
+    row.length = headers.length + 1; // headers do not have "Path"
     rows.push(row.join(","));
   }
   const titles = headers.map((h) => `"${labels[h]}"`);
