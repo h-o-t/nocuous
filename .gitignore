@@ -1,6 +1,2 @@
-/lib/
-/node_modules/
-/output/
-
-.nyc_output
-coverage
+/target
+/deno.lock
