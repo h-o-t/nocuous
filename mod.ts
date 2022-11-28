@@ -1,4 +1,24 @@
 /**
+ * A static analysis tool for JavaScript and TypeScript that provides code
+ * toxicity information.
+ *
+ * ### Example
+ *
+ * Fetches the `std/asserts` library for Deno and its dependencies and returns
+ * a map of the code toxicity statistics.
+ *
+ * ```ts
+ * import { instantiate, stats } from "https://deno.land/x/nocuous/mod.ts";
+ *
+ * await instantiate();
+ *
+ * const stats = await stats(
+ *   new URL("https://deno.land/std/testing/asserts.ts"),
+ * );
+ *
+ * console.log(stats);
+ * ```
+ *
  * @module
  */
 
@@ -10,6 +30,7 @@ interface InstantiationOptions {
   decompress?: (compressed: Uint8Array) => Uint8Array;
 }
 
+/** The level in a {@linkcode StatRecord} that the statistic pertains to. */
 export enum StatLevel {
   Module = "module",
   Class = "class",
@@ -18,6 +39,7 @@ export enum StatLevel {
   Item = "item",
 }
 
+/** The interface representing a return value from {@linkcode stats}. */
 export interface StatRecord {
   /** The name of the metric. */
   metric: string;
@@ -35,10 +57,15 @@ export interface StatRecord {
   score: number;
 }
 
+/** Options which can be set when calling {@linkcode stats}. */
 interface StatsOptions {
+  /** Override the default load behavior, which uses {@linkcode fetch} to
+   * retrieve local or remote resources. */
   load?: (
     specifier: string,
   ) => Promise<[content: string | undefined, contentType: string | undefined]>;
+  /** Override the default resolution behavior, which is a literal resolution
+   * behavior used by Deno and web browsers. */
   resolve?: (specifier: string, referrer: string) => Promise<string>;
 }
 
@@ -88,6 +115,9 @@ export function asURL(
   return inputIsArray ? urls : urls[0];
 }
 
+/** Given a set of URLs, perform a statistical analysis on the roots and their
+ * dependencies, resolving with a {@linkcode Map} where the key is the string
+ * URL of the file and the value is a {@linkcode StatRecord}. */
 export function stats(
   roots: URL | URL[],
   options: StatsOptions = {},
