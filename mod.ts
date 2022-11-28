@@ -12,11 +12,11 @@
  *
  * await instantiate();
  *
- * const stats = await stats(
+ * const results = await stats(
  *   new URL("https://deno.land/std/testing/asserts.ts"),
  * );
  *
- * console.log(stats);
+ * console.log(results);
  * ```
  *
  * @module
