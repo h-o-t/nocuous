@@ -1,28 +1,40 @@
-name: CI
+name: ci
 
-on:
-  push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+on: [push, pull_request]
 
 jobs:
-  test:
+  nocuous:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
+      - name: clone repository
+        uses: actions/checkout@v3
+      
+      - name: install Rust
+        uses: dtolnay/rust-toolchain@stable
 
-      - name: Setup Node.js Enviornment
-        uses: actions/setup-node@v1.4.2
+      - name: cache
+        uses: Swatinem/rust-cache@v1
+
+      - name: install Deno
+        uses: denoland/setup-deno@v1
         with:
-          node-version: 12.18.0
+          deno-version: 1.x
+      
+      - name: format
+        run: |
+          cargo fmt -- --check
+          deno fmt --check
+      
+      - name: lint
+        run: |
+          cargo clippy --locked --release --all-features --all-targets
+          deno lint
 
-      - name: Install packages
-        run: yarn install
+      - name: build
+        run: cargo build
 
-      - name: Run tests
-        run: yarn test
+      - name: test
+        run: deno task test
 
-      - name: Run linting
-        run: yarn lint
+      - name: check wasm build
+        run: deno task build --check

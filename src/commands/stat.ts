@@ -1,78 +1,84 @@
-import { Arguments, CommandBuilder } from "yargs";
-import { create } from "../project";
-import { StatResult, StatResults } from "../interfaces";
-import { load as loadStats } from "../stats/loader";
+/**
+ * @module
+ */
 
-interface StatArguments extends Arguments {
-  inputs: string[];
-  output: string;
-}
+import { colors } from "cliffy/ansi/colors";
+import { Command } from "cliffy/command";
+import { Cell, Row, Table } from "cliffy/table";
+import { common } from "std/path/mod.ts";
 
-export const command = ["$0 [inputs..]", "stat [inputs..]"];
+import { kia } from "../utils/cli.ts";
+import { log } from "../utils/log.ts";
+import { asURL, instantiate, stats } from "../../mod.ts";
 
-export const describe = "Output statistics for a given input file(s).";
-
-export const builder: CommandBuilder = (yargs) => {
-  return yargs
-    .example("$0 main.ts", "analyses and outputs statistics to standard out")
-    .example(
-      "$0 stat main.ts",
-      "analyses and outputs statistics to standard out"
-    )
-    .example(
-      "$0 stat tsconfig.json",
-      "uses the TypeScript configuration file to identify the code to analyse"
-    )
-    .example(
-      "$0 stat -o out.csv index.js",
-      "writes the results as a CSV file to out.csv"
-    )
-    .example(
-      "$0 stat index.js lib.js",
-      "analyses both `index.js` and `lib.js` and any modules they import"
-    )
-    .example(
-      "$0 stat src/**/*.js",
-      "analyse all the files that end in `.js` in the src directory and sub-directories"
-    )
-    .option("output", {
-      alias: "o",
-      describe: "write out the output as a CSV file to the specified path",
-      type: "string",
-    })
-    .positional("inputs", {
-      describe: "root input files or a configuration file to analyse",
-      type: "string",
-    });
-};
-
-export async function handler({
-  inputs,
-  output,
-}: StatArguments): Promise<void> {
-  if (!inputs) {
-    throw new TypeError("input source required");
-  }
-  console.log(`- Analyzing "${inputs.join(`", "`)}"`);
-  const project = create(inputs);
-  const sourceFiles = project.getSourceFiles();
-  const results: StatResults = {};
-  const statInfo = await loadStats();
-  for (const sourceFile of sourceFiles) {
-    const filename = sourceFile.getFilePath();
-    // eslint-disable-next-line no-multi-assign
-    const stats: StatResult[] = (results[filename] = []);
-    for (const { fn, options } of statInfo.values()) {
-      const result = await fn(sourceFile, options);
-      if (result) {
-        stats.push(result);
-      }
+export default new Command()
+  .arguments("<source:string>")
+  .description("Analyze source outputting code toxicity stats.")
+  .action(async (_options, source) => {
+    performance.mark("stats-start");
+    log.step(`Analyzing code starting at "${source}"...`);
+    let url: URL;
+    try {
+      url = new URL(source);
+    } catch {
+      url = asURL(source);
     }
-  }
-  if (output) {
-    const { report } = await import("../reports/csv");
-    report(results, { output });
-  }
-  const { report } = await import("../reports/table");
-  report(results);
-}
+    kia.start("Analyzing...");
+    await instantiate();
+    const results = await stats(url);
+    const measure = performance.measure("stats-start");
+    kia.succeed(`Done in ${measure.duration.toFixed(2)}ms.`);
+    const commonPath = common([...results.keys()]);
+    const values = new Map<
+      string,
+      { metricShort: string; count: number; score: number }
+    >();
+    const rows = new Map<
+      string,
+      { label: string; total: number; items: Map<string, number> }
+    >();
+    for (const [path, records] of results) {
+      let total = 0;
+      const label = path.replace(commonPath, "");
+      const items = new Map<string, number>();
+      for (const { metric, metricShort, count, score } of records) {
+        if (!values.has(metric)) {
+          values.set(metric, { metricShort, count: 0, score: 0 });
+        }
+        const value = values.get(metric)!;
+        value.count += count;
+        value.score += score;
+        total += score;
+        items.set(metric, score);
+      }
+      rows.set(path, { label, total, items });
+    }
+    const statHeader = [...values.values()]
+      .map(({ metricShort }) => metricShort);
+    const body: (string | number | Cell | undefined)[][] = [];
+    for (const { label, total, items } of rows.values()) {
+      const row: (string | number | Cell | undefined)[] = [
+        label,
+        total ? total.toFixed(2) : undefined,
+      ];
+      for (const metric of values.keys()) {
+        const value = items.get(metric);
+        row.push(value ? value.toFixed(2) : undefined);
+      }
+      body.push(row);
+    }
+    const counts: (string | number | undefined)[] = [
+      colors.italic("Counts"),
+      undefined,
+    ];
+    const scores = [colors.bold("Total"), undefined];
+    for (const { count, score } of values.values()) {
+      counts.push(count ? count : undefined);
+      scores.push(score ? score.toFixed(2) : undefined);
+    }
+    body.push(counts, scores);
+    new Table()
+      .header(Row.from(["Path", "Score", ...statHeader]).border(true))
+      .body(body)
+      .render();
+  });
