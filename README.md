@@ -1,6 +1,6 @@
 # nocuous
 
-![CI](https://github.com/h-o-t/nocuous/workflows/CI/badge.svg)
+![CI](https://github.com/h-o-t/nocuous/workflows/ci/badge.svg)
 [![npm version](https://img.shields.io/npm/v/nocuous)](https://www.npmjs.com/package/nocuous)
 
 A static code analysis tool for JavaScript and TypeScript.
