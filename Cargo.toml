@@ -1,6 +1,6 @@
 [package]
 name = "nocuous"
-version = "0.10.0"
+version = "1.0.2"
 edition = "2021"
 description = "Wasm bindings to peform static analysis of JavaScript and TypeScript code"
 authors = ["Kitson P. Kelly"]
@@ -12,7 +12,7 @@ name = "nocuous"
 
 [dependencies]
 anyhow = "1.0.66"
-deno_ast = { version = "0.21.0", features = ["dep_graph", "module_specifier", "view", "visit"] }
+deno_ast = { version = "0.23.2", features = ["dep_graph", "module_specifier", "view", "visit"] }
 futures = "0.3.25"
 import_map = "0.13.0"
 indexmap = "1.9.2"

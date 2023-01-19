@@ -11,7 +11,7 @@
     }
   },
   "tasks": {
-    "build": "deno run --unstable -A https://deno.land/x/wasmbuild@0.10.2/main.ts --skip-opt",
+    "build": "deno run --unstable -A https://deno.land/x/wasmbuild@0.10.3/main.ts",
     "cli": "deno run --allow-read --allow-net --allow-hrtime cli.ts",
     "test": "deno task test:rust && deno task test:deno",
     "test:deno": "deno test --allow-read=..",

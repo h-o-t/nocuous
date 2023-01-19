@@ -1,9 +1,9 @@
 {
   "imports": {
-    "cliffy/ansi/colors": "https://deno.land/x/cliffy@v0.25.4/ansi/colors.ts",
-    "cliffy/command": "https://deno.land/x/cliffy@v0.25.4/command/mod.ts",
-    "cliffy/table": "https://deno.land/x/cliffy@v0.25.4/table/mod.ts",
+    "cliffy/ansi/colors": "https://deno.land/x/cliffy@v0.25.7/ansi/colors.ts",
+    "cliffy/command": "https://deno.land/x/cliffy@v0.25.7/command/mod.ts",
+    "cliffy/table": "https://deno.land/x/cliffy@v0.25.7/table/mod.ts",
     "kia": "https://deno.land/x/kia@0.4.1b/mod.ts",
-    "std/": "https://deno.land/std@0.165.0/"
+    "std/": "https://deno.land/std@0.173.0/"
   }
 }
