@@ -6,6 +6,7 @@ pub trait Walker {
   fn on_enter(&mut self, _node: Node, _ctx: &mut Context) {}
   fn on_exit(&mut self, _node: Node, _ctx: &mut Context) {}
 
+  fn auto_accessor(&mut self, _n: &AutoAccessor, _ctx: &mut Context) {}
   fn array_lit(&mut self, _n: &ArrayLit, _ctx: &mut Context) {}
   fn array_pat(&mut self, _n: &ArrayPat, _ctx: &mut Context) {}
   fn arrow_expr(&mut self, _n: &ArrowExpr, _ctx: &mut Context) {}
@@ -324,6 +325,7 @@ pub trait Walker {
   fn ts_union_type(&mut self, _n: &TsUnionType, _ctx: &mut Context) {}
   fn unary_expr(&mut self, _n: &UnaryExpr, _ctx: &mut Context) {}
   fn update_expr(&mut self, _n: &UpdateExpr, _ctx: &mut Context) {}
+  fn using_decl(&mut self, _n: &UsingDecl, _ctx: &mut Context) {}
   fn var_decl(&mut self, _n: &VarDecl, _ctx: &mut Context) {}
   fn var_declarator(&mut self, _n: &VarDeclarator, _ctx: &mut Context) {}
   fn while_stmt(&mut self, _n: &WhileStmt, _ctx: &mut Context) {}
@@ -344,6 +346,7 @@ pub trait Traverse: Walker {
 
     use deno_ast::view::Node::*;
     match node {
+      AutoAccessor(n) => self.auto_accessor(n, ctx),
       ArrayLit(n) => self.array_lit(n, ctx),
       ArrayPat(n) => self.array_pat(n, ctx),
       ArrowExpr(n) => self.arrow_expr(n, ctx),
@@ -507,6 +510,7 @@ pub trait Traverse: Walker {
       TsUnionType(n) => self.ts_union_type(n, ctx),
       UnaryExpr(n) => self.unary_expr(n, ctx),
       UpdateExpr(n) => self.update_expr(n, ctx),
+      UsingDecl(n) => self.using_decl(n, ctx),
       VarDecl(n) => self.var_decl(n, ctx),
       VarDeclarator(n) => self.var_declarator(n, ctx),
       WhileStmt(n) => self.while_stmt(n, ctx),

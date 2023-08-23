@@ -1,5 +1,11 @@
 {
-  "importMap": "./import_map.json",
+  "imports": {
+    "cliffy/ansi/colors": "https://deno.land/x/cliffy@v0.25.7/ansi/colors.ts",
+    "cliffy/command": "https://deno.land/x/cliffy@v0.25.7/command/mod.ts",
+    "cliffy/table": "https://deno.land/x/cliffy@v0.25.7/table/mod.ts",
+    "kia": "https://deno.land/x/kia@0.4.1b/mod.ts",
+    "std/": "https://deno.land/std@0.199.0/"
+  },
   "fmt": {
     "files": {
       "exclude": ["target", "lib"]
@@ -11,7 +17,7 @@
     }
   },
   "tasks": {
-    "build": "deno run --unstable -A https://deno.land/x/wasmbuild@0.10.3/main.ts",
+    "build": "deno run -A https://deno.land/x/wasmbuild@0.15.0/main.ts",
     "cli": "deno run --allow-read --allow-net --allow-hrtime cli.ts",
     "test": "deno task test:rust && deno task test:deno",
     "test:deno": "deno test --allow-read=..",
