@@ -7,14 +7,10 @@
     "std/": "https://deno.land/std@0.199.0/"
   },
   "fmt": {
-    "files": {
-      "exclude": ["target", "lib"]
-    }
+    "exclude": ["target", "lib"]
   },
   "lint": {
-    "files": {
-      "exclude": ["target", "lib"]
-    }
+    "exclude": ["target", "lib"]
   },
   "tasks": {
     "build": "deno run -A https://deno.land/x/wasmbuild@0.15.0/main.ts",

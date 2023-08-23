@@ -179,12 +179,7 @@ pub trait Walker {
   fn try_stmt(&mut self, _n: &TryStmt, _ctx: &mut Context) {}
   fn ts_array_type(&mut self, _n: &TsArrayType, _ctx: &mut Context) {}
   fn ts_as_expr(&mut self, _n: &TsAsExpr, _ctx: &mut Context) {}
-  fn ts_satisfies_expr(
-    &mut self,
-    _n: &TsSatisfiesExpr,
-    _ctx: &mut Context,
-  ) {
-  }
+  fn ts_satisfies_expr(&mut self, _n: &TsSatisfiesExpr, _ctx: &mut Context) {}
   fn ts_call_signature_decl(
     &mut self,
     _n: &TsCallSignatureDecl,
