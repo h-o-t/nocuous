@@ -22,7 +22,11 @@
  * @module
  */
 
-import { isAbsolute, join, toFileUrl } from "std/path/mod.ts";
+import {
+  isAbsolute,
+  join,
+  toFileUrl,
+} from "https://deno.land/std@0.200.0/path/mod.ts";
 import * as wasm from "./lib/nocuous.generated.js";
 
 interface InstantiationOptions {

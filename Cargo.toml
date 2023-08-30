@@ -13,15 +13,15 @@ name = "nocuous"
 [dependencies]
 anyhow = "1.0.75"
 deno_ast = { version = "0.28.0", features = ["dep_graph", "module_specifier", "view", "visit"] }
-futures = "0.3.25"
+futures = "0.3.28"
 import_map = "0.15.0"
 indexmap = { version = "2.0.0", features = ["serde"] }
 js-sys = "0.3.64"
 lazy_static = "1.4.0"
-regex = "1.9.3"
+regex = "1.9.4"
 serde = { version = "1.0", features = ["derive"] }
 serde-wasm-bindgen = "0.5.0"
-url = "2.3.1"
+url = "2.4.1"
 wasm-bindgen = { version = "0.2.87", features = ["serde-serialize"] }
 wasm-bindgen-futures = "0.4.37"
 
