@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: clone repository
         uses: actions/checkout@v4
-      
+
       - name: install Rust
         uses: dtolnay/rust-toolchain@stable
 
@@ -22,12 +22,12 @@ jobs:
         uses: denoland/setup-deno@v1
         with:
           deno-version: ${{ matrix.version }}
-      
+
       - name: format
         run: |
           cargo fmt -- --check
           deno fmt --check
-      
+
       - name: lint
         run: |
           cargo clippy --locked --release --all-features --all-targets
