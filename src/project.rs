@@ -1,8 +1,8 @@
 use anyhow::anyhow;
 use anyhow::Result;
+use deno_ast::dep::analyze_module_dependencies;
 use deno_ast::dep::DependencyDescriptor;
 use deno_ast::parse_module;
-use deno_ast::dep::analyze_module_dependencies;
 use deno_ast::MediaType;
 use deno_ast::ParseParams;
 use futures::future::Future;
@@ -167,13 +167,15 @@ impl Project {
         for dep in deps {
           match dep {
             DependencyDescriptor::Static(descriptor) => {
-              if let Ok(specifier) = self.resolve(descriptor.specifier.to_string(), &specifier) {
+              if let Ok(specifier) =
+                self.resolve(descriptor.specifier.to_string(), &specifier)
+              {
                 if !self.specifiers.contains(&specifier) {
                   self.load(&specifier)?;
                   self.specifiers.insert(specifier);
                 }
               }
-            },
+            }
             _ => {}
           }
         }
@@ -201,22 +203,21 @@ mod tests {
   #[test]
   fn test_parse_module() {
     let file = parse_module(ParseParams {
-      specifier: Url::from_file_path("/home/kitsonk/github/tests/fixtures/a.ts").unwrap(),
-      text: 
-        r#"
+      specifier: Url::from_file_path(
+        "/home/kitsonk/github/tests/fixtures/a.ts",
+      )
+      .unwrap(),
+      text: r#"
       const a = require("fs");
       "#
-        .into(),
+      .into(),
       media_type: MediaType::TypeScript,
       capture_tokens: true,
       scope_analysis: false,
       maybe_syntax: None,
     })
     .unwrap();
-    let deps = analyze_module_dependencies(
-      file.module(),
-      file.comments(),
-    );
+    let deps = analyze_module_dependencies(file.module(), file.comments());
     println!("{:?}", deps);
   }
 }
