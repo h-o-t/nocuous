@@ -103,6 +103,7 @@ impl Visit for BinaryExpressionComplexityCounter {
 #[cfg(test)]
 mod tests {
   use super::*;
+  use url::Url;
 
   #[test]
   fn walker_counts_properly() {
@@ -119,8 +120,8 @@ mod tests {
     }"#;
 
     let parsed_source = deno_ast::parse_module(deno_ast::ParseParams {
-      specifier: "file://test/a.ts".to_string(),
-      text_info: deno_ast::SourceTextInfo::new(source.into()),
+      specifier: Url::parse("file://test/a.ts").unwrap(),
+      text: source.into(),
       media_type: deno_ast::MediaType::TypeScript,
       capture_tokens: true,
       scope_analysis: false,

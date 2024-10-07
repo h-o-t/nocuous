@@ -1,10 +1,10 @@
 use anyhow::anyhow;
 use anyhow::Result;
+use deno_ast::dep::DependencyDescriptor;
 use deno_ast::parse_module;
-use deno_ast::swc::dep_graph::analyze_dependencies;
+use deno_ast::dep::analyze_module_dependencies;
 use deno_ast::MediaType;
 use deno_ast::ParseParams;
-use deno_ast::SourceTextInfo;
 use futures::future::Future;
 use futures::stream::FuturesUnordered;
 use futures::stream::StreamExt;
@@ -148,8 +148,8 @@ impl Project {
           None
         };
         let parsed_source = parse_module(ParseParams {
-          specifier: specifier.to_string(),
-          text_info: SourceTextInfo::new(source.into()),
+          specifier: specifier.clone(),
+          text: source.into(),
           media_type: MediaType::from_specifier_and_headers(
             &specifier,
             maybe_headers.as_ref(),
@@ -159,19 +159,22 @@ impl Project {
           maybe_syntax: None,
         })?;
 
-        let deps = analyze_dependencies(
+        let deps = analyze_module_dependencies(
           parsed_source.module(),
-          parsed_source.comments().as_swc_comments().as_ref(),
+          parsed_source.comments(),
         );
 
         for dep in deps {
-          if let Ok(specifier) =
-            self.resolve(dep.specifier.to_string(), &specifier)
-          {
-            if !self.specifiers.contains(&specifier) {
-              self.load(&specifier)?;
-              self.specifiers.insert(specifier);
-            }
+          match dep {
+            DependencyDescriptor::Static(descriptor) => {
+              if let Ok(specifier) = self.resolve(descriptor.specifier.to_string(), &specifier) {
+                if !self.specifiers.contains(&specifier) {
+                  self.load(&specifier)?;
+                  self.specifiers.insert(specifier);
+                }
+              }
+            },
+            _ => {}
           }
         }
 
@@ -198,22 +201,21 @@ mod tests {
   #[test]
   fn test_parse_module() {
     let file = parse_module(ParseParams {
-      specifier: "/home/kitsonk/github/tests/fixtures/a.ts".to_string(),
-      text_info: SourceTextInfo::from_string(
+      specifier: Url::from_file_path("/home/kitsonk/github/tests/fixtures/a.ts").unwrap(),
+      text: 
         r#"
       const a = require("fs");
       "#
-        .to_string(),
-      ),
+        .into(),
       media_type: MediaType::TypeScript,
       capture_tokens: true,
       scope_analysis: false,
       maybe_syntax: None,
     })
     .unwrap();
-    let deps = analyze_dependencies(
+    let deps = analyze_module_dependencies(
       file.module(),
-      file.comments().as_swc_comments().as_ref(),
+      file.comments(),
     );
     println!("{:?}", deps);
   }

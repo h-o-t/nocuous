@@ -2,7 +2,7 @@
  * @module
  */
 
-import { Command } from "cliffy/command";
+import { Command } from "@cliffy/command";
 import stat from "./src/commands/stat.ts";
 
 await new Command()

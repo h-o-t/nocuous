@@ -39,7 +39,7 @@ impl Stat for AnonInnerLength {
     let threshold = maybe_threshold.unwrap_or(35);
     let mut collector = AnonInnerLengthCollector::new(
       threshold,
-      context.parsed_source.text_info(),
+      context.parsed_source.text_info_lazy(),
     );
     context.parsed_source.module().visit_with(&mut collector);
     context.add_stat(StatRecord {
@@ -96,6 +96,7 @@ impl<'view> Visit for AnonInnerLengthCollector<'view> {
 #[cfg(test)]
 mod tests {
   use super::*;
+  use url::Url;
 
   #[test]
   fn anon_inner_length_collector() {
@@ -152,8 +153,8 @@ mod tests {
     "#;
 
     let parsed_source = deno_ast::parse_module(deno_ast::ParseParams {
-      specifier: "file://test/a.ts".to_string(),
-      text_info: deno_ast::SourceTextInfo::new(source.into()),
+      specifier: Url::parse("file://test/a.ts").unwrap(),
+      text: source.into(),
       media_type: deno_ast::MediaType::TypeScript,
       capture_tokens: true,
       scope_analysis: false,
@@ -162,7 +163,7 @@ mod tests {
     .unwrap();
 
     let mut collector =
-      AnonInnerLengthCollector::new(35, parsed_source.text_info());
+      AnonInnerLengthCollector::new(35, parsed_source.text_info_lazy());
     parsed_source.module().visit_with(&mut collector);
     assert_eq!(collector.count, 4);
     assert_eq!(collector.score, 1.0);

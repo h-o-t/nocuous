@@ -1,5 +1,5 @@
-import { assertEquals } from "std/testing/asserts.ts";
-import { join } from "std/path/mod.ts";
+import { assertEquals } from "@std/assert/equals";
+import { join } from "@std/path";
 import { asURL, instantiate, stats } from "./mod.ts";
 
 Deno.test({

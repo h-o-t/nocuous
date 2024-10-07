@@ -2,7 +2,7 @@
  * @module
  */
 
-import { colors } from "cliffy/ansi/colors";
+import { colors } from "@cliffy/ansi/colors";
 
 export class Log {
   #log = console.log.bind(console);

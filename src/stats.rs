@@ -57,8 +57,10 @@ pub trait Stat: std::fmt::Debug + Send + Sync {
   where
     Self: Sized;
 
+  #[allow(dead_code)]
   fn code(&self) -> &'static str;
 
+  #[allow(dead_code)]
   fn short_code(&self) -> &'static str;
 
   fn stat<'a>(&self, context: &mut Context<'a>, maybe_threshold: Option<u32>);

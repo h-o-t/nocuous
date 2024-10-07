@@ -5,9 +5,12 @@ on: [push, pull_request]
 jobs:
   nocuous:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [1.x, canary]
     steps:
       - name: clone repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: install Rust
         uses: dtolnay/rust-toolchain@stable
@@ -18,7 +21,7 @@ jobs:
       - name: install Deno
         uses: denoland/setup-deno@v1
         with:
-          deno-version: 1.x
+          deno-version: ${{ matrix.version }}
       
       - name: format
         run: |

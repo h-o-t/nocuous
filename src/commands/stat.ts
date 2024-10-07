@@ -2,12 +2,12 @@
  * @module
  */
 
-import { colors } from "cliffy/ansi/colors";
-import { Command } from "cliffy/command";
-import { Cell, Row, Table } from "cliffy/table";
-import { common } from "std/path/mod.ts";
+import { colors } from "@cliffy/ansi/colors";
+import { Command } from "@cliffy/command";
+import { type Cell, Row, Table } from "@cliffy/table";
+import { wait } from "@denosaurs/wait";
+import { common } from "@std/path";
 
-import { kia } from "../utils/cli.ts";
 import { log } from "../utils/log.ts";
 import { asURL, instantiate, stats } from "../../mod.ts";
 
@@ -23,11 +23,11 @@ export default new Command()
     } catch {
       url = asURL(source);
     }
-    kia.start("Analyzing...");
+    const spinner = wait("Analyzing...").start();
     await instantiate();
     const results = await stats(url);
     const measure = performance.measure("stats-start");
-    kia.succeed(`Done in ${measure.duration.toFixed(2)}ms.`);
+    spinner.succeed(`Done in ${measure.duration.toFixed(2)}ms.`);
     const commonPath = common([...results.keys()]);
     const values = new Map<
       string,

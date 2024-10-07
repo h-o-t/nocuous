@@ -31,7 +31,7 @@ impl Stat for FileLength {
     maybe_threshold: Option<u32>,
   ) {
     let threshold = maybe_threshold.unwrap_or(500);
-    let code = context.parsed_source.text_info().text();
+    let code = context.parsed_source.text_info_lazy().text();
     let line_count = lines_of_code(code.as_ref());
     let score = if line_count >= threshold {
       line_count as f64 / threshold as f64

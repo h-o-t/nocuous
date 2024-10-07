@@ -8,12 +8,12 @@
  * a map of the code toxicity statistics.
  *
  * ```ts
- * import { instantiate, stats } from "https://deno.land/x/nocuous/mod.ts";
+ * import { instantiate, stats } from "jsr:@higher-order-testing/nocuous";
  *
  * await instantiate();
  *
  * const results = await stats(
- *   new URL("https://deno.land/std/testing/asserts.ts"),
+ *   new URL("https://jsr.io/@std/assert/1.0.6/equal.ts"),
  * );
  *
  * console.log(results);
@@ -22,11 +22,7 @@
  * @module
  */
 
-import {
-  isAbsolute,
-  join,
-  toFileUrl,
-} from "https://deno.land/std@0.200.0/path/mod.ts";
+import { isAbsolute, join, toFileUrl } from "@std/path";
 import * as wasm from "./lib/nocuous.generated.js";
 
 interface InstantiationOptions {
