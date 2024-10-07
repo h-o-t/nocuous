@@ -1,23 +1,23 @@
 # nocuous
 
 ![CI](https://github.com/h-o-t/nocuous/workflows/ci/badge.svg)
-[![npm version](https://img.shields.io/npm/v/nocuous)](https://www.npmjs.com/package/nocuous)
+[![jsr.io/@higher-order-testing/nocuous](https://jsr.io/badges/@higher-order-testing/nocuous)](https://jsr.io/@higher-order-testing/nocuous)
+[![jsr.io/@higher-order-testing/nocuous score](https://jsr.io/badges/@higher-order-testing/nocuous/score)](https://jsr.io/@higher-order-testing/nocuous)
 
 A static code analysis tool for JavaScript and TypeScript.
 
 ## Installing the CLI
 
 If you want to install the CLI, you would need to have Deno
-[installed first](https://deno.land/manual@v1.28.2/getting_started/installation)
+[installed first](https://docs.deno.com/runtime/getting_started/installation/)
 and then on the command line, you would want to run the following command:
 
 ```shell
-$ deno install --name nocuous --allow-read --allow-net --allow-hrtime --import-map https://deno.land/x/nocuous/import_map.json -f https://deno.land/x/nocuous/cli.ts
+$ deno install --name nocuous --allow-read --allow-net -f jsr:@higher-order-testing/nocuous/cli
 ```
 
 You can also "pin" to a specific version by using `nocuous@{version}` instead,
-for example `https://deno.land/nocuous@1.0.0/import_map.json` and
-`https://deno.land/nocuous@1.0.0/cli.ts`.
+for example `jsr:@higher-order-testing/nocuous@1.1.0/cli`.
 
 The CLI comes with integrated help which can be accessed via the `--help` flag.
 
@@ -28,20 +28,14 @@ into your code. For example the following will analyze the Deno std assertion
 library and its dependencies resolving with a map of statistics:
 
 ```ts
-import { instantiate, stats } from "https://deno.land/x/nocuous/mod.ts";
+import { instantiate, stats } from "jsr:@higher-order-testing/nocuous";
 
 await instantiate();
 
-const results = await stats(
-  new URL("https://deno.land/std/testing/asserts.ts"),
-);
+const results = await stats(new URL("https://jsr.io/@std/assert/1.0.6/mod.ts"));
 
 console.log(results);
 ```
-
-It is recommended though that you "pin" to a specific version of the library,
-for example to import from version _1.0.0_ you would want to import from
-`https://deno.land/x/nocuous@1.0.0/mod.ts`.
 
 ## Architecture
 
@@ -69,3 +63,7 @@ to TypeScript/JavaScript there are some adaptation that is required:
 | Cyclomatic Complexity           | CC          | The cyclomatic complexity for a function or method                                              | 10                |
 | Binary Expression Complexity    | BEC         | How complex a binary expression is (e.g. how many `&&` and `                                    |                   |
 | Missing Switch Default          | MSD         | Any `switch` statements that are missing the `default` case.                                    | 1                 |
+
+---
+
+Copyright 2019 - 2024 Kitson P. Kelly. MIT License.

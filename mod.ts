@@ -4,7 +4,7 @@
  *
  * ### Example
  *
- * Fetches the `std/asserts` library for Deno and its dependencies and returns
+ * Fetches the `@std/assert` library for Deno and its dependencies and returns
  * a map of the code toxicity statistics.
  *
  * ```ts
@@ -12,9 +12,7 @@
  *
  * await instantiate();
  *
- * const results = await stats(
- *   new URL("https://jsr.io/@std/assert/1.0.6/equal.ts"),
- * );
+ * const results = await stats(new URL("https://jsr.io/@std/assert/1.0.6/mod.ts"));
  *
  * console.log(results);
  * ```
